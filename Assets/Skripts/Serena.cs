@@ -14,16 +14,22 @@ public class Serena : MonoBehaviour
     private Coroutine _fadeInJob;
     private float _target = 1f;
 
+    public void PlaySerena()
+    {
+        _audioSource.Play();
+        _fadeInJob =  StartCoroutine(FadeIn());
+    }
+
+    public void StopSerena()
+    {
+        _audioSource.Stop();
+        StopCoroutine(_fadeInJob);
+    }
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = _minimunVolume;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        _audioSource.Play();
-        StartCoroutine(FadeIn());
     }
 
     private void ChangeVolume()
@@ -45,17 +51,6 @@ public class Serena : MonoBehaviour
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _target, speed * Time.deltaTime);
             ChangeVolume();
             yield return null;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (_audioSource.volume != _minimunVolume)
-        {
-            _target = _minimunVolume;
-            FadeIn();
-            _audioSource.Stop();
-            StopCoroutine(FadeIn());
         }
     }
 }

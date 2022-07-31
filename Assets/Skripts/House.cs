@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
-[RequireComponent(typeof(AudioSource))]
 public class House : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _reached;
+    [SerializeField] private UnityEvent _movementStarted;
+    [SerializeField] private UnityEvent _movementLeft;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
          if(collision.TryGetComponent<Player>(out Player player))
         {
-            _reached?.Invoke();
+            _movementStarted?.Invoke();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<Player>(out Player player))
+        {
+            _movementLeft?.Invoke();
         }
     }
 }
