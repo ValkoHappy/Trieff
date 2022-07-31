@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class House : MonoBehaviour
 {
-    [SerializeField] private UnityEvent _movementStarted;
-    [SerializeField] private UnityEvent _movementLeft;
+    [SerializeField] private UnityEvent _entered;
+    [SerializeField] private UnityEvent _exited;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
          if(collision.TryGetComponent<Player>(out Player player))
         {
-            _movementStarted?.Invoke();
+            _entered?.Invoke();
         }
     }
 
@@ -20,7 +20,7 @@ public class House : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            _movementLeft?.Invoke();
+            _exited?.Invoke();
         }
     }
 }

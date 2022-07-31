@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(AudioSource))]
 public class Serena : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    [SerializeField] private float _speed;
     [SerializeField] private float _maximumVolume;
     [SerializeField] private float _minimunVolume;
 
@@ -16,14 +16,16 @@ public class Serena : MonoBehaviour
 
     public void PlaySerena()
     {
+        _target = _maximumVolume;
         _audioSource.Play();
         _fadeInJob =  StartCoroutine(FadeIn());
     }
 
     public void StopSerena()
     {
-        _audioSource.Stop();
+        _target = _minimunVolume;
         StopCoroutine(_fadeInJob);
+        _fadeInJob = StartCoroutine(FadeIn());
     }
 
     private void Start()
@@ -48,8 +50,7 @@ public class Serena : MonoBehaviour
     {
         while (_audioSource.volume != _target)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _target, speed * Time.deltaTime);
-            ChangeVolume();
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, _target, _speed * Time.deltaTime);
             yield return null;
         }
     }

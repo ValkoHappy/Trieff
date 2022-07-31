@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924155422c8b3354ea12dc4613afbefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  _speed: 1
   _maximumVolume: 1
   _minimunVolume: 0
 --- !u!114 &364660842
@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b1a9e58fdcd348449b05b378f07d7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementEnter:
+  _entered:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 364660841}
@@ -375,7 +375,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _movementLeave:
+  _exited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 364660841}
