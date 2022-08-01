@@ -14,6 +14,12 @@ public class Serena : MonoBehaviour
     private Coroutine _fadeInJob;
     private float _target = 1f;
 
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = _minimunVolume;
+    }
+
     public void PlaySerena()
     {
         _target = _maximumVolume;
@@ -26,12 +32,6 @@ public class Serena : MonoBehaviour
         _target = _minimunVolume;
         StopCoroutine(_fadeInJob);
         _fadeInJob = StartCoroutine(FadeIn());
-    }
-
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-        _audioSource.volume = _minimunVolume;
     }
 
     private void ChangeVolume()
